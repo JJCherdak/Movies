@@ -1,7 +1,8 @@
-package com.geekbrains.movies
+package com.geekbrains.movies.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.geekbrains.movies.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
