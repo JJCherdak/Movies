@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.geekbrains.movies.R
@@ -19,8 +18,8 @@ class ScreenFragment: Fragment() {
     private val binding
         get() = _binding!!
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+    private val viewModel: ViewModel by lazy {
+        ViewModelProvider(this).get(ViewModel::class.java)
     }
     private val adapter = RecyclerAdapter()
 
@@ -81,5 +80,6 @@ class ScreenFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        adapter.removeOnItemViewClickListener()
     }
 }

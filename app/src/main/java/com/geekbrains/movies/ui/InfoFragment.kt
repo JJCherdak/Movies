@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.geekbrains.movies.R
+import com.geekbrains.movies.data.repository.FakeRepository
 import com.geekbrains.movies.databinding.InfoScreenLayoutBinding
 import com.geekbrains.movies.domain.Movie
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class InfoFragment: Fragment() {
 
@@ -29,8 +34,25 @@ class InfoFragment: Fragment() {
 
         binding.mainFragmentRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.mainFragmentRecyclerView.adapter = adapter
-        arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
-            adapter.setData(movie.actors)
+
+        val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)!!
+        with (binding) {
+        FakeRepository().getMovie()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ adapter.setData(it[0].actors) },{})
+
+
+                title.text = movie.title
+                score.text = movie.rating
+                description.text = movie.description
+                genre.text = movie.genres.toString().removePrefix("[").removeSuffix("]")
+                date.text = movie.year
+                Glide.with(binding.poster.context)
+                    .load(movie.image)
+                    .error(R.drawable.background)
+                    .placeholder(R.drawable.poster)
+                    .into(this.poster)
         }
     }
 

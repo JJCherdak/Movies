@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/x-files/programming/Movies/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1485" />
         <entry key="..\:/x-files/programming/Movies/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1485" />
+        <entry key="..\:/x-files/programming/Movies/app/src/main/res/layout/activity_main.xml" value="0.11778115501519756" />
         <entry key="..\:/x-files/programming/Movies/app/src/main/res/layout/cast_recycler_adapter.xml" value="0.2421875" />
+        <entry key="..\:/x-files/programming/Movies/app/src/main/res/layout/cast_recycler_item.xml" value="0.2421875" />
         <entry key="..\:/x-files/programming/Movies/app/src/main/res/layout/info_screen_layout.xml" value="0.2421875" />
         <entry key="..\:/x-files/programming/Movies/app/src/main/res/layout/recycler_item.xml" value="0.2421875" />
         <entry key="..\:/x-files/programming/Movies/app/src/main/res/layout/screen_layout.xml" value="0.2421875" />

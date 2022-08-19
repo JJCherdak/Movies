@@ -3,13 +3,15 @@ package com.geekbrains.movies.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.geekbrains.movies.R
 import com.geekbrains.movies.databinding.RecyclerItemBinding
 import com.geekbrains.movies.domain.Movie
 
 class RecyclerAdapter :
     RecyclerView.Adapter<RecyclerAdapter.MainViewHolder>() {
 
-    private var filmData: List<Movie> = listOf()
+    private var MovieData: List<Movie> = listOf()
     private var onItemViewClickListener: ScreenFragment.OnItemViewClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -22,11 +24,11 @@ class RecyclerAdapter :
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bind(filmData[position])
+        holder.bind(MovieData[position])
     }
 
     override fun getItemCount(): Int {
-        return filmData.size
+        return MovieData.size
     }
 
     inner class MainViewHolder(private val binding: RecyclerItemBinding) :
@@ -35,6 +37,13 @@ class RecyclerAdapter :
         fun bind(movie: Movie) {
             binding.apply {
                 title.text = movie.title
+                date.text = movie.year
+                Glide.with(binding.poster.context)
+                    .load(movie.image)
+                    .error(R.drawable.background)
+                    .placeholder(R.drawable.poster)
+                    .into(this.poster)
+
                 root.setOnClickListener {
                     onItemViewClickListener?.onItemViewClick(movie)
                 }
@@ -50,7 +59,7 @@ class RecyclerAdapter :
         onItemViewClickListener = null
     }
     fun setData(data: List<Movie>) {
-        filmData = data
+        MovieData = data
         notifyDataSetChanged()
     }
 }
